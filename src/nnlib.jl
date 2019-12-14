@@ -28,4 +28,4 @@ end
   λ * ifelse(x > 0, x/1, α * (exp(x) - 1))
 end
 
-@cufunc softplus(x) = log1p(exp(x))
+@cufunc softplus(x) = ifelse(x < convert(eltype(x), 16), log1p(exp(x)), x)
